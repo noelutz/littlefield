@@ -1,0 +1,42 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+<h1>Most recent revenue</h1>
+{% for r in data|reverse %}
+  {% if loop.index <= 5 %}
+    <p>Day {{r}}: ${{data[r]['Total Revenue']}}</p>
+  {% endif %}
+{% endfor %}
+
+<h1>Average revenue since day 50</h1>
+<p>${{avg_revenue}}</p>
+
+<h1>Standing</h1>
+{% for r in standing %}
+  {% if loop.index == 1 %}
+    <p>Pos:{{r[0]}} {{r[1]}} {{r[2]}}</p>
+  {% elif r[1] == team %}
+    <p>Pos:{{r[0]}} {{r[1]}} {{r[2]}}</p>
+  {% endif %}
+{% endfor %}
+
+<h1>Data</h1>
+<table cellspacing='0'
+  <tr>
+{% for f in fields %}
+   <th>{{f}}</th>
+{% endfor %}
+  <tr>
+{% for r in data %}
+  <tr>
+  {% for c in fields %}
+    <td>{{data[r][c]}}</td>
+  {% endfor %}
+  </tr>
+{% endfor %}
+</table>
+</body>
+</html>
